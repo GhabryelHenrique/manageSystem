@@ -1,0 +1,9 @@
+:host::ng-deep .p-menu{
+  height: 100%;
+  border: none
+}
+
+:host::ng-deep .p-ripple.p-element.p-menuitem-link{
+  font-weight: 600;
+  color: #202224;
+}

@@ -30,9 +30,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "manageSystem:build:production"
+              "buildTarget": "manageSystem:build:production"
             },
             "development": {
-              "browserTarget": "manageSystem:build:development"
+              "buildTarget": "manageSystem:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "manageSystem:build"
+            "buildTarget": "manageSystem:build"
           }
         },
         "test": {

@@ -1,48 +1,72 @@
-<p-menubar [model]="items">
-  <ng-template pTemplate="start">
-      <svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="..." fill="var(--primary-color)" />
-          <mask id="mask0_1_36" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="31" height="33">
-              <path d="..." fill="var(--primary-color-text)" />
-          </mask>
-          <g mask="url(#mask0_1_36)">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="..." />
-          </g>
-          <path d="..." fill="var(--primary-color-text)" />
-          <path d="..." fill="var(--primary-color-text)" />
-          <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="..."
-              fill="var(--primary-color-text)"
+<div class="card mainContent">
+  <p-menubar>
+    <ng-template pTemplate="start">
+      <div class="d-flex ml-1 align-items-center" style="gap: 5%">
+        <i class="pi pi-align-justify"></i>
+        <p-iconField iconPosition="left">
+          <p-inputIcon styleClass="pi pi-search" />
+          <input
+            type="text"
+            pInputText
+            placeholder="Search"
+            class="inputSearch"
           />
-          <path d="..." fill="var(--primary-color-text)" />
-          <path d="..." fill="var(--primary-color-text)" />
-          <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="..."
-              fill="var(--primary-color-text)"
-          />
-          <path d="..." fill="var(--primary-color-text)" />
-          <path d="..." fill="var(--primary-color-text)" />
-          <path d="..." fill="var(--primary-color-text)" />
-          <path d="..." fill="var(--primary-color-text)" />
-      </svg>
-  </ng-template>
-  <ng-template pTemplate="item" let-item let-root="root">
-      <a pRipple class="flex align-items-center p-menuitem-link">
-          <span [class]="item.icon"></span>
-          <span class="ml-2">{{ item.label }}</span>
-          <p-badge *ngIf="item.badge" [ngClass]="{ 'ml-auto': !root, 'ml-2': root }" [value]="item.badge" />
-          <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut }}</span>
-          <i *ngIf="item.items" [ngClass]="['pi', root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto']"></i>
-      </a>
-  </ng-template>
-  <ng-template pTemplate="end">
-      <div class="flex align-items-center gap-2">
-          <input type="text" pInputText placeholder="Search" class="w-8rem sm:w-auto" />
-          <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+        </p-iconField>
       </div>
-  </ng-template>
-</p-menubar>
+    </ng-template>
+
+    <ng-template pTemplate="end">
+      <div class="d-flex align-items-center gap-2">
+        <i
+          style="cursor: pointer"
+          class="pi pi-bell mr-2 p-text-secondary"
+          pBadge
+          value="2"
+        ></i>
+        <p-dropdown
+          [options]="countries"
+          [(ngModel)]="selectedCountry"
+          optionLabel="name"
+          placeholder="Linguagem"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div
+              class="d-flex align-items-center gap-2"
+              *ngIf="selectedCountry"
+            >
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                [class]="'flag flag-' + selectedCountry.code.toLowerCase()"
+                style="width: 18px"
+              />
+              <div>{{ selectedCountry.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="d-flex align-items-center gap-2">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                [class]="'flag flag-' + country.code.toLowerCase()"
+                style="width: 18px"
+              />
+              <div>{{ country.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+
+
+        <div class="card d-flex flex-row gap-3 align-items-center pl-2 pr-3 profile">
+          <p-avatar
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          shape="circle"
+          />
+          <div class="d-flex flex-column">
+            <p class="p-text-secondary" style="font-weight: 600;">Ghabs</p>
+            <p class="p-text-secondary" style="    font-size: small;">Administrador</p>
+          </div>
+          </div>
+
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>

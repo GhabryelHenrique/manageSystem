@@ -1,0 +1,32 @@
+<div class="card d-flex flex-column p-3">
+  <div class="d-flex flex-row gap-5">
+    <div class="d-flex flex-column">
+      <p class="cardTitle mb-3">{{ title }}</p>
+      <h3 class="cardValue">{{ value | number }}</h3>
+    </div>
+    <p-avatar
+      styleClass="mr-2"
+      size="xlarge"
+      shape="circle"
+      [style]="avatarStyle"
+    >
+      <span class="material-symbols-outlined" style="font-size: 32px">
+        {{ icon }}
+      </span>
+    </p-avatar>
+  </div>
+  <p class="percentGraph">
+    <span
+      class="percentGraph"
+      [ngClass]="{ green: percent > 0, red: percent < 0 }"
+      ><span
+        class="material-symbols-outlined"
+        style="font-size: 22px; top: 5px; position: relative"
+      >
+        {{ percent < 0 ? "trending_down" : "trending_up" }}
+      </span>
+      {{ percent }}%</span
+    >
+    em 1 semana
+  </p>
+</div>

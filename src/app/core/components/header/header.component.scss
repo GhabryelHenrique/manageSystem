@@ -1,0 +1,40 @@
+@import url('../../../shared/scss/flags.scss');
+
+
+:host::ng-deep .p-dropdown, .inputSearch, .profile{
+  border-radius: 100px;
+}
+
+:host::ng-deep .p-inputtext{
+  padding: .2rem 2rem;
+}
+
+:host::ng-deep .p-element.p-dropdown-label.p-inputtext{
+  padding: .2rem 0.75rem;
+}
+
+:host::ng-deep.p-menubar{
+  background-color: #ffffff;
+}
+
+:host::ng-deep.p-menubar.p-component,.mainContent{
+  border: none;
+}
+
+:host::ng-deep .p-badge {
+  background: #3B82F6;
+  color: #ffffff;
+  font-size: .56rem;
+  display: flex !important;
+  font-weight: 700;
+  min-width: 1rem;
+  height: 1rem;
+  line-height: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+p-avatar{
+  width: 32px;
+  height: 32px;
+}

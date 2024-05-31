@@ -1,0 +1,23 @@
+<h1 class="mb-4" style="font-size: 32px; font-weight: 700">Dashboard</h1>
+<div class="main gap-3 flex-row w-100">
+  <section class="">
+    <div class="d-flex flex-row gap-5">
+      <div *ngFor="let card of cardsInformations">
+        <app-card-info
+        title="{{ card.title }}"
+        [value]="card.value"
+        [percent]="card.percent"
+        icon="{{ card.icon }}"
+        [avatarStyle]="card.avatarStyle"
+        ></app-card-info>
+      </div>
+    </div>
+    <div class="card p-3 mt-5">
+      <app-line-chart></app-line-chart>
+  </div>
+</section>
+
+
+  <app-pie-chart></app-pie-chart>
+
+</div>
