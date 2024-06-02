@@ -1,8 +1,4 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { PieChartComponent } from './pie-chart.component';
 
 describe('PieChartComponent', () => {
@@ -11,7 +7,7 @@ describe('PieChartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PieChartComponent ]
+      imports: [PieChartComponent] // Mova o PieChartComponent para imports
     })
     .compileComponents();
   }));

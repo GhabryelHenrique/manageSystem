@@ -48,8 +48,9 @@ export class SidebarComponent implements OnInit {
             icon: 'pi pi-calendar',
           },
           {
-            label: 'A fazer',
+            label: 'Tarefas',
             icon: 'pi pi-file',
+            route: '/todo',
           },
           {
             label: 'Dispesas',

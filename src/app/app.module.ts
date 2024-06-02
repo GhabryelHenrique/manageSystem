@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreComponentsModule } from './core/components/core-components.module';
 
@@ -15,7 +14,11 @@ const routes: Routes = [
   {
     path: 'produtos',
     loadChildren: () => import('./modules/produtos/produtos.module').then(m => m.ProdutosModule)
-  }
+  },
+  {
+    path: 'todo',
+    loadChildren: () => import('./modules/todo/todo.module').then(m => m.TodoModule)
+  },
 ]
 
 
@@ -28,8 +31,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     CoreComponentsModule,
     RouterModule.forRoot(routes),
-    AppRoutingModule
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

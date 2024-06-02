@@ -4,20 +4,57 @@
     <div class="d-flex flex-row gap-5">
       <div *ngFor="let card of cardsInformations">
         <app-card-info
-        title="{{ card.title }}"
-        [value]="card.value"
-        [percent]="card.percent"
-        icon="{{ card.icon }}"
-        [avatarStyle]="card.avatarStyle"
+          title="{{ card.title }}"
+          [value]="card.value"
+          [percent]="card.percent"
+          icon="{{ card.icon }}"
+          [avatarStyle]="card.avatarStyle"
         ></app-card-info>
       </div>
     </div>
     <div class="card p-3 mt-5">
       <app-line-chart></app-line-chart>
+    </div>
+  </section>
+
+  <div>
+    <app-pie-chart></app-pie-chart>
+
+    <div class="card d-flex mt-3 justify-content-center">
+      <p-table
+        [value]="products"
+        [scrollable]="true"
+        scrollHeight="320px"
+        [tableStyle]="{ width: '100%' }"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="id">N° <p-sortIcon field="id" /></th>
+            <th pSortableColumn="name">Item<p-sortIcon field="name" /></th>
+            <th pSortableColumn="status">
+              Status<p-sortIcon field="status" />
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>
+              <p-badge
+                [value]="product.status"
+                [severity]="
+                  product.status === 'Concluido'
+                    ? 'success'
+                    : product.status === 'Pendente'
+                    ? 'warning'
+                    : 'danger'
+                "
+              />
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </div>
-</section>
-
-
-  <app-pie-chart></app-pie-chart>
-
 </div>

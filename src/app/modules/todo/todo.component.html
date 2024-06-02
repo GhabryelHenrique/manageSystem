@@ -1,0 +1,211 @@
+<p-confirmDialog />
+<div class="d-flex flex-row justify-content-between mb-3">
+  <h1 style="font-size: 32px; font-weight: 700">Lista de Tarefas</h1>
+  <div class="d-flex flex-column align-items-end">
+    <p-button label="Criar Tarefa" [raised]="true" routerLink="/todo/create" />
+
+    <p-selectButton styleClass="mt-3 align-self-end"
+    [options]="justifyOptions"
+    [(ngModel)]="value"
+    (onChange)="onChange($event)"
+    optionLabel="icon">
+    <ng-template let-item pTemplate>
+      <i [class]="item.icon"></i>
+    </ng-template>
+  </p-selectButton>
+</div>
+</div>
+
+<div class="card" *ngIf="tasks && exibirModo === 'table'">
+  <p-table [value]="tasks" [tableStyle]="{ width: '100%' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id">N° <p-sortIcon field="id" />
+        <th pSortableColumn="name">Item<p-sortIcon field="name" />
+        <th pSortableColumn="startDate">Data Inicial<p-sortIcon field="startDate" />
+        <th pSortableColumn="endDate">Data Final<p-sortIcon field="endDate" />
+        <th pSortableColumn="status">Status<p-sortIcon field="status" />
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+      <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.startDate | date : "dd/MM/yyyy" }}</td>
+        <td>{{ product.endDate | date : "dd/MM/yyyy" }}</td>
+        <td>
+          <p-badge
+            [value]="product.status"
+            [severity]="
+              product.status === 'Concluido'
+                ? 'success'
+                : product.status === 'Pendente'
+                ? 'warning'
+                : 'danger'
+            "
+          />
+        </td>
+        <td>
+          <p-button icon="pi pi-eye" size="small" [rounded]="true" [text]="true" [raised]="true" severity="secondary" />
+          <p-button class="ml-3 buttonIcon" icon="pi pi-pencil" size="small" [routerLink]="['/todo/edit/', product.id]" [rounded]="true" [text]="true" [raised]="true" severity="secondary" />
+          <p-button class="ml-3 buttonIcon" icon="pi pi-times" size="small" [rounded]="true" [text]="true" [raised]="true" severity="danger" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<div class="card gridCard d-grid flex-row" *ngIf="tasks && exibirModo === 'cards'">
+  <div
+    class="card p-2 m-2 border-1 surface-border border-round"
+    pDroppable
+    (onDrop)="drop('notStartedTasks')"
+  >
+    <div class="mb-2 d-flex flex-row align-items-center justify-content-center">
+      <p-badge value="Não iniciado" severity="danger" />
+    </div>
+    <ul
+      class="list-none d-flex flex-column gap-2 p-0 m-0"
+      *ngIf="notStartedTasks"
+    >
+      <li
+        *ngFor="let task of notStartedTasks"
+        class="p-2 border-round shadow-1 card"
+        pDraggable
+        (onDragStart)="dragStart(task)"w
+        (onDragEnd)="dragEnd()"
+      >
+        <div class="d-flex">
+          <p>
+            <span style="font-weight: 700">{{ task.id }}</span>
+            {{ task.name }}
+          </p>
+        </div>
+        <p>
+          {{ "Data Inicial: " }}
+          <span class="p-text-secondary">
+            {{ task.startDate | date : "dd/MM/yyyy" }}
+          </span>
+        </p>
+        <p>
+          {{ "Data Final: " }}
+          <span class="p-text-secondary">
+            {{ task.endDate | date : "dd/MM/yyyy" }}
+          </span>
+        </p>
+
+        <p-badge
+          [value]="
+            calculateDaysLeft(task) +
+            (calculateDaysLeft(task) > 0
+              ? ' dias restantes'
+              : ' dias em atrazo')
+          "
+          [severity]="calculateDaysLeft(task) > 0 ? 'success' : 'danger'"
+        />
+      </li>
+    </ul>
+  </div>
+  <div
+    class="card p-2 m-2 border-1 surface-border border-round"
+    pDroppable
+    (onDrop)="drop('inProgressTasks')"
+  >
+    <div class="mb-2 d-flex flex-row align-items-center justify-content-center">
+      <p-badge value="Em progresso" severity="warning" />
+    </div>
+    <ul
+      class="list-none d-flex flex-column gap-2 p-0 m-0"
+      *ngIf="inProgressTasks"
+    >
+      <li
+        *ngFor="let task of inProgressTasks"
+        class="p-2 border-round shadow-1 card"
+        pDraggable
+        (onDragStart)="dragStart(task)"
+        (onDragEnd)="dragEnd()"
+      >
+      <div class="d-flex">
+        <p>
+          <span style="font-weight: 700">{{ task.id }}</span>
+          {{ task.name }}
+        </p>
+      </div>
+      <p>
+        {{ "Data Inicial: " }}
+        <span class="p-text-secondary">
+          {{ task.startDate | date : "dd/MM/yyyy" }}
+        </span>
+      </p>
+      <p>
+        {{ "Data Final: " }}
+        <span class="p-text-secondary">
+          {{ task.endDate | date : "dd/MM/yyyy" }}
+        </span>
+      </p>
+
+      <p-badge
+        [value]="
+          calculateDaysLeft(task) +
+          (calculateDaysLeft(task) > 0
+            ? ' dias restantes'
+            : ' dias em atrazo')
+        "
+        [severity]="calculateDaysLeft(task) > 0 ? 'success' : 'danger'"
+      />
+      </li>
+    </ul>
+  </div>
+  <div
+    class="card p-2 m-2 border-1 surface-border border-round"
+    pDroppable
+    (onDrop)="drop('completedTasks')"
+  >
+    <div class="mb-2 d-flex flex-row align-items-center justify-content-center">
+      <p-badge value="Concluido" severity="success" />
+    </div>
+    <ul
+      class="list-none d-flex flex-column gap-2 p-0 m-0"
+      pDraggable
+      *ngIf="completedTasks"
+    >
+      <li
+        *ngFor="let task of completedTasks"
+        class="p-2 border-round shadow-1 card"
+        pDraggable
+        (onDragStart)="dragStart(task)"
+        (onDragEnd)="dragEnd()"
+      >
+      <div class="d-flex">
+        <p>
+          <span style="font-weight: 700">{{ task.id }}</span>
+          {{ task.name }}
+        </p>
+      </div>
+      <p>
+        {{ "Data Inicial: " }}
+        <span class="p-text-secondary">
+          {{ task.startDate | date : "dd/MM/yyyy" }}
+        </span>
+      </p>
+      <p>
+        {{ "Data Final: " }}
+        <span class="p-text-secondary">
+          {{ task.endDate | date : "dd/MM/yyyy" }}
+        </span>
+      </p>
+
+      <p-badge
+        [value]="
+          calculateDaysLeft(task) +
+          (calculateDaysLeft(task) > 0
+            ? ' dias restantes'
+            : ' dias em atrazo')
+        "
+        [severity]="calculateDaysLeft(task) > 0 ? 'success' : 'danger'"
+      />
+      </li>
+    </ul>
+  </div>
+</div>

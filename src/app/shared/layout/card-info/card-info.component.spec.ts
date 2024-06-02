@@ -11,7 +11,7 @@ describe('CardInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardInfoComponent ]
+      imports: [ CardInfoComponent ]
     })
     .compileComponents();
   }));

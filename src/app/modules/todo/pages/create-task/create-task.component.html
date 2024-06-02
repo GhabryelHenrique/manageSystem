@@ -1,0 +1,62 @@
+<div class="d-flex flex-row justify-content-between mb-3">
+  <p-toast />
+  <h1 style="font-size: 32px; font-weight: 700">Criar Tarefa</h1>
+
+  <p-button label="Voltar" [raised]="true" routerLink="/todo" />
+</div>
+
+<form [formGroup]="form" (submit)="createTask()">
+  <div class="mb-3 d-flex flex-column">
+    <label for="title" class="form-label"
+      >Titulo <span style="color: #e25858">*</span></label
+    >
+    <input
+      formControlName="title"
+      type="text"
+      pInputText
+      id="title"
+      placeholder="Digite o titulo da task"
+    />
+  </div>
+
+  <div class="d-flex flex-row gap-5 w-100 mb-3">
+    <div class="d-flex flex-column">
+      <label for="startDate"
+        >Data Inicial <span style="color: #e25858">*</span></label
+      >
+      <p-calendar
+        id="startDate"
+        formControlName="startDate"
+        [showButtonBar]="true"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+      />
+    </div>
+
+    <div class="d-flex flex-column">
+      <label for="endDate">Data Final </label>
+      <p-calendar
+        id="endDate"
+        formControlName="endDate"
+        [showButtonBar]="true"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+      />
+    </div>
+  </div>
+  <div class="mb-3 d-flex flex-column">
+    <label for="description"
+      >Descrição <span style="color: #e25858">*</span></label
+    >
+    <textarea
+      pInputTextarea
+      formControlName="description"
+      id="description"
+      placeholder="Digite a descrição da task"
+      rows="3"
+    ></textarea>
+  </div>
+  <button type="submit" [disabled]="this.form.invalid" class="btn btn-primary">
+    Criar tarefa
+  </button>
+</form>

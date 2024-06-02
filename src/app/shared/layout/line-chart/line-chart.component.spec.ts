@@ -1,8 +1,4 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { LineChartComponent } from './line-chart.component';
 
 describe('LineChartComponent', () => {
@@ -11,7 +7,7 @@ describe('LineChartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LineChartComponent ]
+      imports: [LineChartComponent] // Mova o LineChartComponent para imports
     })
     .compileComponents();
   }));

@@ -1,0 +1,17 @@
+.gridCard{
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button.p-component.p-button-icon-only.p-button-raised.p-button-rounded.p-button-text.p-button-sm{
+  border-radius: 200px;
+}
+:host ::ng-deep {
+  [pDraggable] {
+      cursor: move;
+  }
+}
+
+:host ::ng-deep .p-ripple.p-element.p-button.p-component {
+  padding: .5rem;
+}

@@ -6,7 +6,7 @@ import * as echarts from 'echarts';
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
   standalone: true,
-  imports: []
+  imports: [],
 })
 export class LineChartComponent implements OnInit {
 
