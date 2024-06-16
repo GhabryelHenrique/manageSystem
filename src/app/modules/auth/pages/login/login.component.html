@@ -1,0 +1,49 @@
+<div
+  class="mainComponente d-flex justify-content-center align-items-center"
+  style="height: 100vh"
+>
+  <div style="width: 60%" class="shadow login">
+    <div class="grid-group">
+      <div class="d-flex flex-column px-2 justify-content-center login-grid">
+        <h2 class="card-title">Entrar</h2>
+        <form [formGroup]="loginForm">
+          <div class="form-group mb-3">
+            <input
+              type="email"
+              id="loginEmail"
+              class="form-control input-group"
+              formControlName="email"
+              pInputText
+              placeholder="Email"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-5">
+            <input
+              type="password"
+              pInputPassword
+              id="loginPassword"
+              formControlName="password"
+              class="form-control input-group"
+              placeholder="Senha"
+              required
+            />
+          </div>
+          <button
+            class="btn btn-primary btn-login"
+            type="button"
+            pButton
+            (click)="login()"
+          >
+            Login
+          </button>
+        </form>
+        <span>Não Possui Conta? <a href="/auth/register">Criar</a></span>
+      </div>
+      <div>
+        <img class="logo" src="assets/login.png" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
